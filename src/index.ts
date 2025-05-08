@@ -66,9 +66,6 @@ const myCar = new Car("Toyota", 2020, "Corolla");
 // console.log(myCar.getInfo());
 // console.log(myCar.getModel());
 
-
-
-
 //number 5
 function processValue(value: string | number): number {
   if (typeof value === "string") {
@@ -76,6 +73,50 @@ function processValue(value: string | number): number {
   } else if (typeof value === "number") {
     return value * 2;
   }
- 
+
   throw new Error("Invalid input type");
 }
+// console.log(processValue("hello world"));
+// console.log(processValue(10));
+
+//number 6
+interface Product {
+  name: string;
+  price: number;
+}
+
+function getMostExpensiveProduct(products: Product[]): Product | null {
+  if (products.length === 0) return null;
+  return products.reduce((maxProduct, currentProduct) =>
+    currentProduct.price > maxProduct.price ? currentProduct : maxProduct
+  );
+}
+const products = [
+  { name: "Pen", price: 10 },
+  { name: "Notebook", price: 25 },
+  { name: "Bag", price: 50 },
+];
+
+getMostExpensiveProduct(products);
+// console.log(products);
+
+
+// problem 6
+enum Day {
+  Monday,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday,
+  Sunday
+}
+
+function getDayType(day: Day): string {
+  if (day === Day.Saturday || day === Day.Sunday) {
+    return "Weekend";
+  }
+  return "Weekday";
+}
+
+console.log(getDayType(Day.Monday)); 
