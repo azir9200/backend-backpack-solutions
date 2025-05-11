@@ -1,21 +1,32 @@
+// Problem 1:
+
+import { current } from "@reduxjs/toolkit";
+
 function formatString(input: string, toUpper?: boolean): string {
-  if (toUpper === false) {
+  if (toUpper == undefined) {
+    return input.toUpperCase();
+    console.log(formatString("Hello", false));
+    // console.log(formatString("Hello", true));
+  } else if (toUpper == true) {
+    return input.toUpperCase();
+  } else {
     return input.toLowerCase();
   }
-  return input.toUpperCase();
 }
 
-// Example usage:
-// console.log(formatString("Hello"));
-// console.log(formatString("Hello", true));
-// console.log(formatString("Hello", false));
+// Problem 2:
 
-// //  number 2
+// function filterByRating(
+//   items: { title: string; rating: number }[]
+// ): { title: string; rating: number }[] {
+//   return items.filter((item) => item.rating >= 4);
+// }
 
 function filterByRating(
   items: { title: string; rating: number }[]
 ): { title: string; rating: number }[] {
-  return items.filter((item) => item.rating >= 4);
+  const books = items.filter((item) => item.rating >= 4);
+  return books;
 }
 
 const books = [
@@ -26,97 +37,90 @@ const books = [
 
 // console.log(filterByRating(books));
 
-// //  number 3
-
+// Problem 3:
 function concatenateArrays<T>(...arrays: T[][]): T[] {
-  return arrays.reduce((acc, curr) => acc.concat(curr), []);
+  return arrays.reduce((acc, current) => acc.concat(current), []);
 }
+
+const concat = concatenateArrays(["a", "b"], ["c"]);
+concatenateArrays([1, 2], [3, 4], [5]);
 // console.log(concatenateArrays([1, 2], [3, 4], [5]));
 
-// //  number 4
-
+// Problem 4:
 class Vehicle {
   private make: string;
   private year: number;
+  model: string;
 
-  constructor(make: string, year: number) {
-    this.make = make;
-    this.year = year;
+  constructor(make: string, year: number, model: string) {
+    (this.make = make), (this.year = year);
+    this.model = model;
   }
 
-  public getInfo(): string {
-    return `Make: ${this.make}, Year: ${this.year}`;
+  getInfo(): string {
+    return `azir: Make: ${this.make},  Year: ${this.year}, Model:${this.model}`;
   }
 }
 
 class Car extends Vehicle {
-  private model: string;
-
   constructor(make: string, year: number, model: string) {
-    super(make, year);
-    this.model = model;
+    super(make, year, model);
   }
-
-  public getModel(): string {
-    return `Model: ${this.model}`;
+  getModel(): string {
+    return `Model:  ${this.model} ,  `;
   }
 }
 
 const myCar = new Car("Toyota", 2020, "Corolla");
-// console.log(myCar.getInfo());
-// console.log(myCar.getModel());
+myCar.getInfo();
+myCar.getModel();
+console.log(myCar.getInfo());
+console.log(myCar.getModel());
 
-//number 5
 function processValue(value: string | number): number {
-  if (typeof value === "string") {
-    return value.length;
-  } else if (typeof value === "number") {
-    return value * 2;
-  }
-
-  throw new Error("Invalid input type");
+  return typeof value === "string" ? value.length : value * 2;
 }
-// console.log(processValue("hello world"));
-// console.log(processValue(10));
-
-//number 6
-interface Product {
+console.log(processValue("hello"), processValue(10));
+// Problem 6
+ 
+ interface Product {
   name: string;
   price: number;
 }
 
-function getMostExpensiveProduct(products: Product[]): Product | null {
-  if (products.length === 0) return null;
-  return products.reduce((maxProduct, currentProduct) =>
-    currentProduct.price > maxProduct.price ? currentProduct : maxProduct
-  );
-}
-const products = [
-  { name: "Pen", price: 10 },
-  { name: "Notebook", price: 25 },
-  { name: "Bag", price: 50 },
-];
 
-getMostExpensiveProduct(products);
+
+// function getMostExpensiveProduct(products: Product[]): Product | null {
+//   if (products.length === 0) return null;
+//   return products.reduce((maxProduct, currentProduct) =>
+//     currentProduct.price > maxProduct.price ? currentProduct : maxProduct
+//   );
+// }
+// const products = [
+//   { name: "Pen", price: 10 },
+//   { name: "Notebook", price: 25 },
+//   { name: "Bag", price: 50 },
+// ];
+
+// getMostExpensiveProduct(products);
 // console.log(products);
 
+// Problem 7:
+// enum Day {
+//   Monday,
+//   Tuesday,
+//   Wednesday,
+//   Thursday,
+//   Friday,
+//   Saturday,
+//   Sunday,
+// }
 
-// problem 6
-enum Day {
-  Monday,
-  Tuesday,
-  Wednesday,
-  Thursday,
-  Friday,
-  Saturday,
-  Sunday
-}
+// function getDayType(day: Day): string {
+//   if (day === Day.Saturday || day === Day.Sunday) {
+//     return "Weekend";
+//   }
+//   return "Weekday";
+// }
 
-function getDayType(day: Day): string {
-  if (day === Day.Saturday || day === Day.Sunday) {
-    return "Weekend";
-  }
-  return "Weekday";
-}
-
-console.log(getDayType(Day.Monday)); 
+// console.log(getDayType(Day.Monday));
