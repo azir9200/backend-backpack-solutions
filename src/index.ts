@@ -1,26 +1,19 @@
 // Problem 1:
 
-import { current } from "@reduxjs/toolkit";
-
 function formatString(input: string, toUpper?: boolean): string {
   if (toUpper == undefined) {
     return input.toUpperCase();
-    console.log(formatString("Hello", false));
-    // console.log(formatString("Hello", true));
   } else if (toUpper == true) {
     return input.toUpperCase();
   } else {
     return input.toLowerCase();
   }
 }
+// console.log(formatString("Hello"));
+// console.log(formatString("Hello", true));
+// console.log(formatString("Hello", false));
 
 // Problem 2:
-
-// function filterByRating(
-//   items: { title: string; rating: number }[]
-// ): { title: string; rating: number }[] {
-//   return items.filter((item) => item.rating >= 4);
-// }
 
 function filterByRating(
   items: { title: string; rating: number }[]
@@ -44,27 +37,28 @@ function concatenateArrays<T>(...arrays: T[][]): T[] {
 
 const concat = concatenateArrays(["a", "b"], ["c"]);
 concatenateArrays([1, 2], [3, 4], [5]);
-// console.log(concatenateArrays([1, 2], [3, 4], [5]));
+//  console.log(concatenateArrays([1, 2], [3, 4], [5]));
 
 // Problem 4:
 class Vehicle {
   private make: string;
   private year: number;
-  model: string;
 
-  constructor(make: string, year: number, model: string) {
-    (this.make = make), (this.year = year);
-    this.model = model;
+  constructor(make: string, year: number) {
+    this.make = make;
+    this.year = year;
   }
 
   getInfo(): string {
-    return `azir: Make: ${this.make},  Year: ${this.year}, Model:${this.model}`;
+    return ` Make: ${this.make},  Year: ${this.year}}`;
   }
 }
 
 class Car extends Vehicle {
+  model: string;
   constructor(make: string, year: number, model: string) {
-    super(make, year, model);
+    super(make, year);
+    this.model = model;
   }
   getModel(): string {
     return `Model:  ${this.model} ,  `;
@@ -74,53 +68,80 @@ class Car extends Vehicle {
 const myCar = new Car("Toyota", 2020, "Corolla");
 myCar.getInfo();
 myCar.getModel();
-console.log(myCar.getInfo());
-console.log(myCar.getModel());
+// console.log(myCar.getInfo());
+// console.log(myCar.getModel());
 
+// Problem 5
 function processValue(value: string | number): number {
   return typeof value === "string" ? value.length : value * 2;
 }
-console.log(processValue("hello"), processValue(10));
+// console.log(processValue("hello"));
+// console.log(processValue(10));
+
 // Problem 6
- 
- interface Product {
+interface Product {
   name: string;
   price: number;
 }
 
+function getMostExpensiveProduct(products: Product[]): Product | null {
+  if (products.length === 0) {
+    return null;
+  }
+  let maxProduct = products[0];
 
+  for (let product of products) {
+    if (product.price > maxProduct.price) {
+      maxProduct = product;
+    }
+  }
 
-// function getMostExpensiveProduct(products: Product[]): Product | null {
-//   if (products.length === 0) return null;
-//   return products.reduce((maxProduct, currentProduct) =>
-//     currentProduct.price > maxProduct.price ? currentProduct : maxProduct
-//   );
-// }
-// const products = [
-//   { name: "Pen", price: 10 },
-//   { name: "Notebook", price: 25 },
-//   { name: "Bag", price: 50 },
-// ];
+  return maxProduct;
+}
+const products = [
+  { name: "Pen", price: 10 },
+  { name: "Notebook", price: 25 },
+  { name: "Bag", price: 50 },
+];
 
-// getMostExpensiveProduct(products);
-// console.log(products);
+getMostExpensiveProduct(products);
+// console.log(getMostExpensiveProduct(products));
 
 // Problem 7:
-// enum Day {
-//   Monday,
-//   Tuesday,
-//   Wednesday,
-//   Thursday,
-//   Friday,
-//   Saturday,
-//   Sunday,
-// }
+enum Day {
+  Monday,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday,
+  Sunday,
+}
 
-// function getDayType(day: Day): string {
-//   if (day === Day.Saturday || day === Day.Sunday) {
-//     return "Weekend";
-//   }
-//   return "Weekday";
-// }
+function getDayType(day: Day): string {
+  let weekend;
+  if (day === Day.Saturday || day === Day.Sunday) {
+    return "Weekend";
+  } else {
+    return "Weekday";
+  }
+}
 
-// console.log(getDayType(Day.Monday));
+getDayType(Day.Monday);
+console.log(getDayType(Day.Monday));
+
+// Problems 8
+
+async function squareAsync(n: number): Promise<number> {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (n > 0) {
+        resolve(n * n);
+      } else {
+        reject("Error: Negative number not allowed");
+      }
+    }, 1000);
+  });
+}
+squareAsync(4).then(console.log);
+squareAsync(-3).catch(console.error);
