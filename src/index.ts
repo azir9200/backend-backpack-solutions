@@ -1,5 +1,3 @@
-// Problem 1:
-
 function formatString(input: string, toUpper?: boolean): string {
   if (toUpper == undefined) {
     return input.toUpperCase();
@@ -9,11 +7,9 @@ function formatString(input: string, toUpper?: boolean): string {
     return input.toLowerCase();
   }
 }
-// console.log(formatString("Hello"));
-// console.log(formatString("Hello", true));
-// console.log(formatString("Hello", false));
-
-// Problem 2:
+console.log(formatString("Hello"));
+console.log(formatString("Hello", true));
+console.log(formatString("Hello", false));
 
 function filterByRating(
   items: { title: string; rating: number }[]
@@ -28,18 +24,16 @@ const books = [
   { title: "Book C", rating: 5.0 },
 ];
 
-// console.log(filterByRating(books));
+console.log(filterByRating(books));
 
-// Problem 3:
 function concatenateArrays<T>(...arrays: T[][]): T[] {
   return arrays.reduce((acc, current) => acc.concat(current), []);
 }
 
 const concat = concatenateArrays(["a", "b"], ["c"]);
 concatenateArrays([1, 2], [3, 4], [5]);
-//  console.log(concatenateArrays([1, 2], [3, 4], [5]));
+console.log(concatenateArrays([1, 2], [3, 4], [5]));
 
-// Problem 4:
 class Vehicle {
   private make: string;
   private year: number;
@@ -68,17 +62,15 @@ class Car extends Vehicle {
 const myCar = new Car("Toyota", 2020, "Corolla");
 myCar.getInfo();
 myCar.getModel();
-// console.log(myCar.getInfo());
-// console.log(myCar.getModel());
+console.log(myCar.getInfo());
+console.log(myCar.getModel());
 
-// Problem 5
 function processValue(value: string | number): number {
   return typeof value === "string" ? value.length : value * 2;
 }
-// console.log(processValue("hello"));
-// console.log(processValue(10));
+console.log(processValue("hello"));
+console.log(processValue(10));
 
-// Problem 6
 interface Product {
   name: string;
   price: number;
@@ -105,9 +97,8 @@ const products = [
 ];
 
 getMostExpensiveProduct(products);
-// console.log(getMostExpensiveProduct(products));
+console.log(getMostExpensiveProduct(products));
 
-// Problem 7:
 enum Day {
   Monday,
   Tuesday,
@@ -129,8 +120,6 @@ function getDayType(day: Day): string {
 
 getDayType(Day.Monday);
 console.log(getDayType(Day.Monday));
-
-// Problems 8
 
 async function squareAsync(n: number): Promise<number> {
   return new Promise((resolve, reject) => {
