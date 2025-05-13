@@ -49,7 +49,7 @@ class Vehicle {
 }
 
 class Car extends Vehicle {
-  model: string;
+  private model: string;
   constructor(make: string, year: number, model: string) {
     super(make, year);
     this.model = model;
@@ -110,7 +110,6 @@ enum Day {
 }
 
 function getDayType(day: Day): string {
-  let weekend;
   if (day === Day.Saturday || day === Day.Sunday) {
     return "Weekend";
   } else {
@@ -118,8 +117,8 @@ function getDayType(day: Day): string {
   }
 }
 
-getDayType(Day.Monday);
 console.log(getDayType(Day.Monday));
+console.log(getDayType(Day.Sunday));
 
 async function squareAsync(n: number): Promise<number> {
   return new Promise((resolve, reject) => {

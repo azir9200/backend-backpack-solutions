@@ -25,4 +25,4 @@
 Actually keyof used to ensure only valid key are being used. It
 is very useful to building generic and utility types and functions.
 
-           *** ----***
+           ***---***
