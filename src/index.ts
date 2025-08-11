@@ -1,135 +1,76 @@
-function formatString(input: string, toUpper?: boolean): string {
-  if (toUpper == undefined) {
-    return input.toUpperCase();
-  } else if (toUpper == true) {
-    return input.toUpperCase();
-  } else {
-    return input.toLowerCase();
-  }
-}
-console.log(formatString("Hello"));
-console.log(formatString("Hello", true));
-console.log(formatString("Hello", false));
-
-function filterByRating(
-  items: { title: string; rating: number }[]
-): { title: string; rating: number }[] {
-  const books = items.filter((item) => item.rating >= 4);
-  return books;
-}
-
-const books = [
-  { title: "Book A", rating: 4.5 },
-  { title: "Book B", rating: 3.2 },
-  { title: "Book C", rating: 5.0 },
+// 1.Task: Array Filtering and Mapping
+const people = [
+  { name: "Karina", age: 25, gender: "female" },
+  { name: "Rahim", age: 30, gender: "male" },
+  { name: "Rubina", age: 22, gender: "female" },
+  { name: "Orun", age: 35, gender: "male" },
 ];
 
-console.log(filterByRating(books));
-
-function concatenateArrays<T>(...arrays: T[][]): T[] {
-  return arrays.reduce((acc, current) => acc.concat(current), []);
+function getMaleNames(arr: any) {
+  return arr
+    .filter((person: { gender: any }) => person.gender === "male")
+    .map((person: { name: any }) => person.name);
 }
 
-const concat = concatenateArrays(["a", "b"], ["c"]);
-concatenateArrays([1, 2], [3, 4], [5]);
-console.log(concatenateArrays([1, 2], [3, 4], [5]));
+const result = getMaleNames(people);
+console.log(result);
 
-class Vehicle {
-  private make: string;
-  private year: number;
+//2 Task: Object Manipulation
+const books = [
+  { title: "Putul Nacher Itikotha", author: "Manik Bandopadhyay", year: 1936 },
+  {
+    title: "Pather Panchali",
+    author: "Bibhutibhushan Bandopadhyay",
+    year: 1929,
+  },
+  { title: "Srikanta", author: "Sarat Chandra Chattopadhyay", year: 1917 },
+  { title: "Devdas", author: "Sarat Chandra Chattopadhyay", year: 1917 },
+  { title: "Chokher Bali", author: "Rabindranath Tagore", year: 1903 },
+];
 
-  constructor(make: string, year: number) {
-    this.make = make;
-    this.year = year;
-  }
-
-  getInfo(): string {
-    return ` Make: ${this.make},  Year: ${this.year}}`;
-  }
+function getBookTitles(bookArray: any[]) {
+  return bookArray.map((book: { title: any }) => book.title);
 }
 
-class Car extends Vehicle {
-  private model: string;
-  constructor(make: string, year: number, model: string) {
-    super(make, year);
-    this.model = model;
-  }
-  getModel(): string {
-    return `Model:  ${this.model} ,  `;
-  }
+const titles = getBookTitles(books);
+// console.log(titles);
+
+// 3.Task: Function Composition
+function square(num: number) {
+  return num * num;
 }
 
-const myCar = new Car("Toyota", 2020, "Corolla");
-myCar.getInfo();
-myCar.getModel();
-console.log(myCar.getInfo());
-console.log(myCar.getModel());
-
-function processValue(value: string | number): number {
-  return typeof value === "string" ? value.length : value * 2;
-}
-console.log(processValue("hello"));
-console.log(processValue(10));
-
-interface Product {
-  name: string;
-  price: number;
+function double(num: number) {
+  return num * 2;
 }
 
-function getMostExpensiveProduct(products: Product[]): Product | null {
-  if (products.length === 0) {
+function addFive(num: number) {
+  return num + 5;
+}
+
+function composedFunction(num: number) {
+  return addFive(double(square(num)));
+}
+
+// console.log(composedFunction(3));
+
+// 04. Task: Find Maximum Value
+
+function findMaxValue(numbers: any[]) {
+  if (numbers.length === 0) {
     return null;
   }
-  let maxProduct = products[0];
-
-  for (let product of products) {
-    if (product.price > maxProduct.price) {
-      maxProduct = product;
-    }
-  }
-
-  return maxProduct;
-}
-const products = [
-  { name: "Pen", price: 10 },
-  { name: "Notebook", price: 25 },
-  { name: "Bag", price: 50 },
-];
-
-getMostExpensiveProduct(products);
-console.log(getMostExpensiveProduct(products));
-
-enum Day {
-  Monday,
-  Tuesday,
-  Wednesday,
-  Thursday,
-  Friday,
-  Saturday,
-  Sunday,
+  return Math.max(...numbers);
 }
 
-function getDayType(day: Day): string {
-  if (day === Day.Saturday || day === Day.Sunday) {
-    return "Weekend";
-  } else {
-    return "Weekday";
-  }
-}
+const arr = [3, 7, 2, 9, 5];
+// console.log(findMaxValue(arr));
 
-console.log(getDayType(Day.Monday));
-console.log(getDayType(Day.Sunday));
+// 5  Task: Unique Values
+const numbers = [1, 3, 5, 3, 7, 1, 9, 5];
 
-async function squareAsync(n: number): Promise<number> {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (n > 0) {
-        resolve(n * n);
-      } else {
-        reject("Error: Negative number not allowed");
-      }
-    }, 1000);
-  });
+function getUniqueValues(arr: any) {
+  return [...new Set(arr)];
 }
-squareAsync(4).then(console.log);
-squareAsync(-3).catch(console.error);
+const uniqueNumbers = getUniqueValues(numbers);
+console.log(uniqueNumbers);
