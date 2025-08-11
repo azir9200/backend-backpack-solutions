@@ -13,7 +13,7 @@ function getMaleNames(arr: any) {
 }
 
 const result = getMaleNames(people);
-console.log(result);
+// console.log(result);
 
 //2 Task: Object Manipulation
 const books = [
@@ -73,4 +73,4 @@ function getUniqueValues(arr: any) {
   return [...new Set(arr)];
 }
 const uniqueNumbers = getUniqueValues(numbers);
-console.log(uniqueNumbers);
+// console.log(uniqueNumbers);
